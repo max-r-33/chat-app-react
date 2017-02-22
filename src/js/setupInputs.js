@@ -1,6 +1,14 @@
 import React from 'react';
 
 export default class setupInputs extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    componentDidMount(){
+        document.getElementById('name').focus();
+    }
+
     handleRoomNameSubmit(e){
         e.preventDefault();
         let roomName = document.getElementById('name').value;
@@ -8,7 +16,10 @@ export default class setupInputs extends React.Component{
         document.getElementById('1').style.opacity = 0;
         document.getElementById('name').style.display = 'none';
         document.getElementById('username').style.display = 'inline';
+        document.getElementById('messageUser').focus();
+        this.props.setRoomName(roomName);
     }
+
     handleUsernameSubmit(e){
         e.preventDefault();
         let username = document.getElementById('messageUser').value;
@@ -16,15 +27,15 @@ export default class setupInputs extends React.Component{
         document.getElementById('2').style.opacity = 0;
         document.getElementById('username').style.display = 'none';
         document.getElementById('messageContainer').style.display = 'inline';
+        document.getElementById('messages').style.display = 'inline';
+        this.props.setUsername(username);
     }
-    handleChange(e){
-        console.log(e.target.value);
-    }
+
     render(){
         return (
             <section>
                 <form onSubmit={event => this.handleRoomNameSubmit(event)} className='roomNameContainer'>
-                    <input onChange={event => this.handleChange(event)} autoComplete='off' type='text' id='name' placeholder='chat room name' />
+                    <input autoComplete='off' type='text' id='name' placeholder='chat room name' />
                 </form>
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoComplete="off" id='messageUser' type='text' placeholder='username' />
