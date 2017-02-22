@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import HomeView from './homeView';
+import BackgroundLayers from './backgroundLayers';
+import SetupInputs from './setupInputs';
+
+import reset from '../styles/reset.scss';
+import style from '../styles/styles.scss';
 
 class App extends React.Component {
     render() {
         return(
-			<HomeView />
+            <div>
+    			<BackgroundLayers />
+                <SetupInputs />
+            </div>
 		)
     }
 }
