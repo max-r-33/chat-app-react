@@ -5,6 +5,11 @@ import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Header from './header';
 
+import config from '../../config';
+
+import io from 'socket.io-client'
+let socket = io(config.socketURL);
+
 import reset from '../styles/reset.scss';
 import style from '../styles/styles.scss';
 
@@ -16,20 +21,40 @@ class App extends React.Component {
             username: ''
         }
     }
+
     setRoomName(name) {
         this.setState({roomName: name})
+        socket.emit('room creation', name);
     }
+
     setUsername(uname) {
-        console.log(uname)
         this.setState({username: uname})
     }
+
+    sendMessage(event, messageText){
+        event.preventDefault();
+        alert(messageText)
+        socket.emit('chat message', {
+            user: this.state.username,
+            message: messageText,
+            room: this.state.roomName
+        });
+    }
+
+    componentDidMount(){
+        socket.on('connect', function() {
+            console.log('connected');
+        })
+    }
+    
     render() {
         return (
             <div>
                 <Header roomName={this.state.roomName}/>
                 <BackgroundLayers/>
                 <SetupInputs setRoomName={this.setRoomName.bind(this)}
-                             setUsername={this.setUsername.bind(this)}/>
+                             setUsername={this.setUsername.bind(this)}
+                             sendMessage={this.sendMessage.bind(this)}/>
             </div>
         )
     }

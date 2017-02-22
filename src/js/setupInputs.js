@@ -30,7 +30,6 @@ export default class setupInputs extends React.Component{
         document.getElementById('messages').style.display = 'inline';
         this.props.setUsername(username);
     }
-
     render(){
         return (
             <section>
@@ -40,7 +39,7 @@ export default class setupInputs extends React.Component{
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoComplete="off" id='messageUser' type='text' placeholder='username' />
                 </form>
-                <form className='messageSendContainer' id='messageContainer'>
+                <form onSubmit={event => this.props.sendMessage(event, document.getElementById('messageBox').value)}className='messageSendContainer' id='messageContainer'>
                         <input autoComplete="off" id='messageBox' type='text' placeholder='message' />
                 </form>
             </section>
