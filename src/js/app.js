@@ -33,20 +33,41 @@ class App extends React.Component {
 
     sendMessage(event, messageText){
         event.preventDefault();
-        alert(messageText)
+
+        //emits message
         socket.emit('chat message', {
             user: this.state.username,
             message: messageText,
             room: this.state.roomName
         });
+
+        this.createMessage(messageText, this.state.username);
+    }
+
+    createMessage(text, sender){
+        let d = document.createElement('div');
+        let textNode = document.createTextNode(text);
+        d.className += ' message';
+        if(sender === this.state.username){
+            d.className += ' user';
+        }else{
+            d.className += ' other';
+        }
+        d.appendChild(textNode);
+        document.getElementById('messages').appendChild(d);
     }
 
     componentDidMount(){
         socket.on('connect', function() {
-            console.log('connected');
+            socket.on('chat message', function(msg) {
+                // if (msg.user !== this.state.username) {
+                    console.log(msg);
+                    this.createMessage(msg.user + ' : ' + msg.message, msg.usr);
+                // }
+            });
         })
     }
-    
+
     render() {
         return (
             <div>
@@ -60,5 +81,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <App/>, document.getElementById('app'));
+ReactDOM.render(<App/>, document.getElementById('app'));
