@@ -18,51 +18,43 @@ class App extends React.Component {
         super(props);
         this.state = {
             roomName: '',
-            username: ''
+            username: '',
+            messages: []
         }
     }
 
+    //sets room name
     setRoomName(name) {
         this.setState({roomName: name})
         socket.emit('room creation', name);
     }
 
+    //sets username
     setUsername(uname) {
         this.setState({username: uname})
     }
 
+    //emits send message event
+    //appends message to window
     sendMessage(event, messageText){
         event.preventDefault();
-
         //emits message
         socket.emit('chat message', {
             user: this.state.username,
             message: messageText,
             room: this.state.roomName
         });
-
-        this.createMessage(messageText, this.state.username);
+        let newMsgs = this.state.messages;
+        newMsgs.push(<div key={this.state.messages.length+1} className='user message'>{messageText}</div>);
+        this.setState({messages: newMsgs});
     }
 
-    createMessage(text, sender){
-        let d = document.createElement('div');
-        let textNode = document.createTextNode(text);
-        d.className += ' message';
-        if(sender === this.state.username){
-            d.className += ' user';
-        }else{
-            d.className += ' other';
-        }
-        d.appendChild(textNode);
-        document.getElementById('messages').appendChild(d);
-    }
-
+    //handles all socket events
     componentDidMount(){
         socket.on('connect', function() {
             socket.on('chat message', function(msg) {
-                // if (msg.user !== this.state.username) {
-                    console.log(msg);
-                    this.createMessage(msg.user + ' : ' + msg.message, msg.usr);
+                // if(msg.user !== state.username){
+                    // this.createMessage();
                 // }
             });
         })
@@ -71,7 +63,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header roomName={this.state.roomName}/>
+                <Header roomName={this.state.roomName}
+                        messages={this.state.messages}/>
                 <BackgroundLayers/>
                 <SetupInputs setRoomName={this.setRoomName.bind(this)}
                              setUsername={this.setUsername.bind(this)}

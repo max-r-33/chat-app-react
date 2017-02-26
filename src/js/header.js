@@ -18,6 +18,7 @@ export default class header extends React.Component {
                     <p id='userTyping'></p>
                 </header>
                 <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
+                {this.props.messages}
             </div>
         )
     }
