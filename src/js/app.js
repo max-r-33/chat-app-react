@@ -44,20 +44,21 @@ class App extends React.Component {
             message: messageText,
             room: this.state.roomName
         });
-        let newMsgs = this.state.messages;
-        newMsgs.push(<div key={this.state.messages.length+1} className='user message'>{messageText}</div>);
-        this.setState({messages: newMsgs});
     }
 
     //handles all socket events
     componentDidMount(){
-        socket.on('connect', function() {
-            socket.on('chat message', function(msg) {
-                // if(msg.user !== state.username){
-                    // this.createMessage();
-                // }
+        socket.on('connect', () => {
+            socket.on('chat message', msg => {
+                let newMsgs = this.state.messages;
+                if(msg.user === this.state.username){
+                    newMsgs.push(<div key={this.state.messages.length+1} className='user message'>{msg.message}</div>);
+                }else{
+                    newMsgs.push(<div key={this.state.messages.length+1} className='other message'>{`${msg.user} : ${msg.message}`}</div>);
+                }
+                this.setState({messages: newMsgs});
             });
-        })
+        });
     }
 
     render() {
