@@ -19,7 +19,8 @@ class App extends React.Component {
         this.state = {
             roomName: '',
             username: '',
-            messages: []
+            messages: [],
+            userCount: 0
         }
     }
 
@@ -59,6 +60,14 @@ class App extends React.Component {
                 }
                 this.setState({messages: newMsgs});
             });
+
+            socket.on('user join', userCount => {
+                this.setState({userCount});
+            });
+
+            socket.on('user disconnect', userCount => {
+                this.setState({userCount});
+            });
         });
     }
 
@@ -66,7 +75,8 @@ class App extends React.Component {
         return (
             <div>
                 <Header roomName={this.state.roomName}
-                        messages={this.state.messages}/>
+                        messages={this.state.messages}
+                        userCount={this.state.userCount}/>
                 <BackgroundLayers/>
                 <SetupInputs setRoomName={this.setRoomName.bind(this)}
                              setUsername={this.setUsername.bind(this)}

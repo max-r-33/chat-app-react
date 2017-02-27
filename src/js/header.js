@@ -14,7 +14,7 @@ export default class header extends React.Component {
             <div id='messages'>
                 <header>
                     <p className='roomName'>{this.props.roomName}</p>
-                    <p className='peopleCount'></p>
+                    <p className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
                     <p id='userTyping'></p>
                 </header>
                 <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
