@@ -109,7 +109,7 @@ input:focus {
 /* styles for message view */
 
 header {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100vw;
@@ -121,6 +121,7 @@ header {
     justify-content: center;
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-bottom:5px;
 }
 
 .peopleCount {
@@ -136,7 +137,6 @@ header {
 
 #messages {
     display: none;
-    padding-top: 65px;
 }
 
 #messageBox {

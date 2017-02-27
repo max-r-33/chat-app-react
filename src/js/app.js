@@ -44,6 +44,7 @@ class App extends React.Component {
             message: messageText,
             room: this.state.roomName
         });
+        document.getElementById('messageBox').value ='';
     }
 
     //handles all socket events

@@ -28,6 +28,7 @@ export default class setupInputs extends React.Component{
         document.getElementById('username').style.display = 'none';
         document.getElementById('messageContainer').style.display = 'inline';
         document.getElementById('messages').style.display = 'inline';
+        document.getElementById('messageBox').focus();
         this.props.setUsername(username);
     }
     render(){
