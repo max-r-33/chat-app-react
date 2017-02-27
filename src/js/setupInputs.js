@@ -7,6 +7,7 @@ export default class setupInputs extends React.Component{
 
     componentDidMount(){
         document.getElementById('name').focus();
+        console.log(this.props);
     }
 
     handleRoomNameSubmit(e){
@@ -31,6 +32,7 @@ export default class setupInputs extends React.Component{
         document.getElementById('messageBox').focus();
         this.props.setUsername(username);
     }
+
     render(){
         return (
             <section>
@@ -40,7 +42,10 @@ export default class setupInputs extends React.Component{
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoComplete="off" id='messageUser' type='text' placeholder='username' />
                 </form>
-                <form onSubmit={event => this.props.sendMessage(event, document.getElementById('messageBox').value)}className='messageSendContainer' id='messageContainer'>
+                <form onChange={event => this.props.typingNotif(event)} 
+                      onSubmit={event => this.props.sendMessage(event, document.getElementById('messageBox').value)}
+                      className='messageSendContainer' 
+                      id='messageContainer'>
                         <input autoComplete="off" id='messageBox' type='text' placeholder='message' />
                 </form>
             </section>

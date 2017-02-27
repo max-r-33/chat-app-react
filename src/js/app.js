@@ -48,6 +48,10 @@ class App extends React.Component {
         document.getElementById('messageBox').value ='';
     }
 
+    handleTyping(event){
+        socket.emit('user typing', this.state.username);
+    }
+
     //handles all socket events
     componentDidMount(){
         socket.on('connect', () => {
@@ -68,6 +72,10 @@ class App extends React.Component {
             socket.on('user disconnect', userCount => {
                 this.setState({userCount});
             });
+
+            socket.on('user typing', user => {
+                console.log(`${user} is typing`);
+            })
         });
     }
 
@@ -80,7 +88,8 @@ class App extends React.Component {
                 <BackgroundLayers/>
                 <SetupInputs setRoomName={this.setRoomName.bind(this)}
                              setUsername={this.setUsername.bind(this)}
-                             sendMessage={this.sendMessage.bind(this)}/>
+                             sendMessage={this.sendMessage.bind(this)}
+                             typingNotif={this.handleTyping.bind(this)}/>
             </div>
         )
     }
