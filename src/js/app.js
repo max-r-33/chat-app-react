@@ -51,6 +51,7 @@ class App extends React.Component {
         }
     }
 
+    //emits the user typing event
     handleTyping(event){
         socket.emit('user typing', this.state.username);
     }
@@ -98,7 +99,7 @@ class App extends React.Component {
                 <SetupInputs setRoomName={this.setRoomName.bind(this)}
                              setUsername={this.setUsername.bind(this)}
                              sendMessage={this.sendMessage.bind(this)}
-                             typingNotif={_.debounce(this.handleTyping.bind(this), 200)}/>
+                             typingNotif={_.debounce(this.handleTyping.bind(this), 1000, true)}/>
             </div>
         )
     }

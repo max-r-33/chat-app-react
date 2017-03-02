@@ -47,6 +47,7 @@ body {
     font-size:14px;
     font-weight:300;
     margin-top:3px;
+    transition:all .5s ease-in-out;
 }
 
 input {
@@ -142,6 +143,7 @@ header {
 
     .alwaysVisible{
         position: relative;
+        transition:all .5s ease-in-out;
     }
 }
 
