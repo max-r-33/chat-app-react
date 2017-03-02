@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import scrollToComponent from 'react-scroll-to-component';
 
 export default class header extends React.Component {
     constructor(props){
@@ -11,7 +11,14 @@ export default class header extends React.Component {
             window.location.href='/';
         }
     }
-    
+
+    componentDidUpdate(){
+        scrollToComponent(this.refs.msg,{
+            offset: 1000,
+            duration:100
+        });
+    }
+
     render() {
         return (
             <div id='messages'>
