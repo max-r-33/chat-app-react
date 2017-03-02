@@ -40,13 +40,15 @@ class App extends React.Component {
     //appends message to window
     sendMessage(event, messageText){
         event.preventDefault();
-        //emits message
-        socket.emit('chat message', {
-            user: this.state.username,
-            message: messageText,
-            room: this.state.roomName
-        });
-        document.getElementById('messageBox').value ='';
+        if(messageText){
+            //emits message
+            socket.emit('chat message', {
+                user: this.state.username,
+                message: messageText,
+                room: this.state.roomName
+            });
+            document.getElementById('messageBox').value ='';
+        }
     }
 
     handleTyping(event){
