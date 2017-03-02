@@ -59,9 +59,9 @@ class App extends React.Component {
             socket.on('chat message', msg => {
                 let newMsgs = this.state.messages;
                 if(msg.user === this.state.username){
-                    newMsgs.push(<div key={this.state.messages.length+1} className='user message'>{msg.message}</div>);
+                    newMsgs.push(<div data-aos='slide-left' data-aos-duration='300' data-aos-once='true' data-aos-offset='-10' key={this.state.messages.length+1} className='user message'>{msg.message}</div>);
                 }else{
-                    newMsgs.push(<div key={this.state.messages.length+1} className='other message'>{`${msg.user} : ${msg.message}`}</div>);
+                    newMsgs.push(<div data-aos='slide-right' data-aos-duration='300' data-aos-once='true' data-aos-offset='-10' key={this.state.messages.length+1} className='other message'>{`${msg.user} : ${msg.message}`}</div>);
                 }
                 this.setState({messages: newMsgs});
             });

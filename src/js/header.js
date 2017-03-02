@@ -30,7 +30,7 @@ export default class header extends React.Component {
                     <p className='userTyping'>{this.props.typingStatus}</p>
                     <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
                 </header>
-                <div ref='msg' id='msgCont' className='messageContainer'>
+                <div ref='msg' className='messageContainer'>
                     {this.props.messages}
                 </div>
             </div>
