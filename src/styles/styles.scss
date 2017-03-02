@@ -147,7 +147,8 @@ header {
 .messageContainer{
     margin-top:70px;
     padding-top:5px;
-    margin-bottom:71px;
+    padding-bottom:71px;
+    overflow:scroll;
 }
 
 #messages {
@@ -155,6 +156,7 @@ header {
 }
 
 #messageBox {
+    background-color:rgb(217,216,212);
     width: 100vw;
     border: transparent;
     border-top:1px solid #4C5454;

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class header extends React.Component {
     constructor(props){
@@ -22,7 +23,7 @@ export default class header extends React.Component {
                     <p className='userTyping'>{this.props.typingStatus}</p>
                     <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
                 </header>
-                <div className='messageContainer'>
+                <div ref='msg' id='msgCont' className='messageContainer'>
                     {this.props.messages}
                 </div>
             </div>
