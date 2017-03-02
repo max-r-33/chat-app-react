@@ -20,7 +20,8 @@ class App extends React.Component {
             roomName: '',
             username: '',
             messages: [],
-            userCount: 0
+            userCount: 0,
+            typingStatus: ''
         }
     }
 
@@ -74,7 +75,12 @@ class App extends React.Component {
             });
 
             socket.on('user typing', user => {
-                console.log(`${user} is typing`);
+                if(user !== this.state.username){
+                    this.setState({typingStatus : `${user} is typing`});
+                }
+                setTimeout(()=>{
+                    this.setState({typingStatus:''});
+                },1000)
             })
         });
     }
@@ -84,12 +90,13 @@ class App extends React.Component {
             <div>
                 <Header roomName={this.state.roomName}
                         messages={this.state.messages}
-                        userCount={this.state.userCount}/>
+                        userCount={this.state.userCount}
+                        typingStatus={this.state.typingStatus}/>
                 <BackgroundLayers/>
                 <SetupInputs setRoomName={this.setRoomName.bind(this)}
                              setUsername={this.setUsername.bind(this)}
                              sendMessage={this.sendMessage.bind(this)}
-                             typingNotif={this.handleTyping.bind(this)}/>
+                             typingNotif={_.debounce(this.handleTyping.bind(this), 200)}/>
             </div>
         )
     }
