@@ -130,7 +130,7 @@ header {
     left: 0;
     width: 100vw;
     height: 70px;
-    background-color: rgb(119,121, 123);
+    background-color: rgb(108, 115,123);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -173,7 +173,7 @@ header {
     // background-color: transparent;
     width: 100vw;
     border: transparent;
-    border-top:1px solid #4C5454;
+    border-top:1px solid rgb(108, 115,123);
 }
 
 
@@ -192,7 +192,7 @@ header {
 }
 
 .user {
-    background-color: rgba(41, 50, 60, .66);
+    background-color: rgb(108, 115,123);
     color: $color;
     float: right;
     margin-right: 10px;
