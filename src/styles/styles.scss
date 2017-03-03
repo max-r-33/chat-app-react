@@ -1,3 +1,4 @@
+$transitionTime : .57s;
 body {
     font-family: 'Helvetica Neue';
     font-weight: 500;
@@ -10,23 +11,26 @@ body {
     left:0;
     height: 100vh;
     width: 100vw;
-    transition: opacity .5s ease-in-out;
+    transition: opacity $transitionTime ease-in-out;
 }
 .layer1 {
     z-index: -100;
-    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    // background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
     opacity: 1;
 }
 
 .layer2 {
     z-index: -90;
-    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    // background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
     opacity: 0;
 }
 
 .layer3 {
     z-index: -80;
-    background-image: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%);
+    // background-image: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%);
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
     opacity: 0;
     position:fixed;
     top:0;
@@ -47,7 +51,6 @@ body {
     font-size:14px;
     font-weight:300;
     margin-top:3px;
-    transition:all .5s ease-in-out;
 }
 
 input {
@@ -56,7 +59,8 @@ input {
     padding: 15px;
     color: #4C5454;
     background-color: transparent;
-    transition: all ease-in-out .5s;
+    transition: all ease-in-out $transitionTime;
+    -webkit-backface-visibility: hidden;
 }
 
 
@@ -107,10 +111,11 @@ input:focus {
 }
 
 .messageSendContainer {
-    display: none;
+    opacity:0;
     position: fixed;
     bottom: 0;
     left: 0;
+    transition: all ease-in $transitionTime;
 }
 
 
@@ -122,7 +127,7 @@ header {
     left: 0;
     width: 100vw;
     height: 70px;
-    background-color: rgb(156, 160, 163);
+    background-color: rgb(167, 193, 205);
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -143,7 +148,7 @@ header {
 
     .alwaysVisible{
         position: relative;
-        transition:all .5s ease-in-out;
+        transition:all $transitionTime ease-in-out;
     }
 }
 
@@ -155,11 +160,13 @@ header {
 }
 
 #messages {
-    display: none;
+    opacity:0;
+    transition: all ease-in $transitionTime;
 }
 
 #messageBox {
-    background-color:rgb(217,216,212);
+    background-color:rgb(251,240,236);
+    // background-color: transparent;
     width: 100vw;
     border: transparent;
     border-top:1px solid #4C5454;

@@ -27,8 +27,8 @@ export default class setupInputs extends React.Component{
         document.getElementById('3').style.opacity = 1;
         document.getElementById('2').style.opacity = 0;
         document.getElementById('username').style.display = 'none';
-        document.getElementById('messageContainer').style.display = 'inline';
-        document.getElementById('messages').style.display = 'inline';
+        document.getElementById('messageContainer').style.opacity = 1;
+        document.getElementById('messages').style.opacity = 1;
         document.getElementById('messageBox').focus();
         this.props.setUsername(username);
     }
@@ -42,9 +42,9 @@ export default class setupInputs extends React.Component{
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoComplete="off" id='messageUser' type='text' placeholder='username' />
                 </form>
-                <form onChange={event => this.props.typingNotif(event)} 
+                <form onChange={event => this.props.typingNotif(event)}
                       onSubmit={event => this.props.sendMessage(event, document.getElementById('messageBox').value)}
-                      className='messageSendContainer' 
+                      className='messageSendContainer'
                       id='messageContainer'>
                         <input autoComplete="off" id='messageBox' type='text' placeholder='message' />
                 </form>
