@@ -21,17 +21,12 @@ export default class header extends React.Component {
 
     render() {
         return (
-            <div id='messages'>
-                <header>
-                    <p className='roomName'>{this.props.roomName}</p>
-                    <p className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
-                    <p className='userTyping'>{this.props.typingStatus}</p>
-                    <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
-                </header>
-                <div ref='msg' className='messageContainer'>
-                    {this.props.messages}
-                </div>
-            </div>
+            <header>
+                <p className='roomName'>{this.props.roomName}</p>
+                <p className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
+                <p className='userTyping'>{this.props.typingStatus}</p>
+                <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
+            </header>
         )
     }
 }

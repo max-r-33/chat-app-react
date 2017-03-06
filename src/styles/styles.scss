@@ -5,6 +5,7 @@ body {
     font-family: 'Helvetica Neue';
     font-weight: 500;
 }
+
 body::-webkit-scrollbar{
     display:none;
 }
@@ -23,13 +24,11 @@ body::-webkit-scrollbar{
     background-image: linear-gradient(to top, #e7f0fd 0%, #accbee 100%);
     opacity: 1;
 }
-
 .layer2 {
     z-index: -90;
     background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
     opacity: 0;
 }
-
 .layer3 {
     z-index: -80;
     background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
@@ -80,16 +79,8 @@ input:focus {
     outline: none;
 }
 
-#messageBox {
-    background-color:rgb(230,233,240);
-    width: 100vw;
-    border: transparent;
-    border-top:1px solid rgb(108, 115,123);
-}
-
-
-/*------------------
-//containers for the inputs */
+//------------------
+//containers for the setup inputs
 //------------------
 .roomNameContainer {
     position: absolute;
@@ -106,21 +97,14 @@ input:focus {
     transform: translate(-50%, -50%);
 }
 
-.messageSendContainer {
+//------------------
+//message view styles
+//------------------
+.messageView{
     opacity:0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    transition: all ease-in $transitionTime;
-}
+    transition: all $transitionTime ease-in-out;
 
-
-//----------------
-//styles for header
-//-----------------
-#messages {
-    opacity:0;
-    transition: all ease-in $transitionTime;
+    //styles for header
     header {
         position: fixed;
         top: 0;
@@ -163,48 +147,61 @@ input:focus {
         }
     }
 
-    .messageContainer{
+    //styles for messages display window
+    .messagesDisplay {
         margin-top:70px;
         padding-top:5px;
         padding-bottom:71px;
         overflow:scroll;
+
+        // styles for two different type of messages
+        .message {
+           border-radius: 1px;
+           font-size: 14px;
+           padding: 10px;
+           min-width: 150px;
+           margin-top: 5px;
+           margin-bottom: 5px;
+           cursor: default;
+           clear: both;
+           transition: all .25s ease-in-out;
+        }
+
+        .other {
+            float: left;
+            background-color: rgba(66, 122, 161, .66);
+            color: $color;
+            margin-left: 10px;
+        }
+
+        .other:hover {
+            background-color: rgba(66, 122, 161, .9);
+        }
+
+        .user {
+            background-color: rgb(108, 115,123);
+            color: $color;
+            float: right;
+            margin-right: 10px;
+        }
+
+        .user:hover {
+            background-color: rgba(41, 50, 60, .9);
+        }
+
     }
 
-}
+    //style for message input form
+    .messageSendContainer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
 
-
-/* styles for two different
-   type of messages */
-.other {
-    float: left;
-    background-color: rgba(66, 122, 161, .66);
-    color: $color;
-    margin-left: 10px;
-}
-
-.other:hover {
-    background-color: rgba(66, 122, 161, .9);
-}
-
-.user {
-    background-color: rgb(108, 115,123);
-    color: $color;
-    float: right;
-    margin-right: 10px;
-}
-
-.user:hover {
-    background-color: rgba(41, 50, 60, .9);
-}
-
-.message {
-    border-radius: 1px;
-    font-size: 14px;
-    padding: 10px;
-    min-width: 150px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    cursor: default;
-    clear: both;
-    transition: all .25s ease-in-out;
+        #messageBox {
+            background-color:rgb(230,233,240);
+            width: 100vw;
+            border: transparent;
+            border-top:1px solid rgb(108, 115,123);
+        }
+    }
 }

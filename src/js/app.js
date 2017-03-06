@@ -5,6 +5,8 @@ import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Header from './header';
 import Message from './message';
+import MessageView from './messageView.js';
+
 import config from '../../config';
 
 import io from 'socket.io-client'
@@ -91,15 +93,15 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header roomName={this.state.roomName}
-                        messages={this.state.messages}
-                        userCount={this.state.userCount}
-                        typingStatus={this.state.typingStatus}/>
-                <BackgroundLayers/>
-                <SetupInputs setRoomName={this.setRoomName.bind(this)}
-                             setUsername={this.setUsername.bind(this)}
+                <MessageView messages={this.state.messages}
+                             roomName={this.state.roomName}
+                             userCount={this.state.userCount}
+                             typingStatus={this.state.typingStatus}
                              sendMessage={this.sendMessage.bind(this)}
                              typingNotif={_.debounce(this.handleTyping.bind(this), 1000, true)}/>
+                <BackgroundLayers/>
+                <SetupInputs setRoomName={this.setRoomName.bind(this)}
+                             setUsername={this.setUsername.bind(this)}/>
             </div>
         )
     }
