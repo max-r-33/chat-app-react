@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Header from './header';
-
+import Message from './message';
 import config from '../../config';
 
 import io from 'socket.io-client'
@@ -62,9 +62,9 @@ class App extends React.Component {
             socket.on('chat message', msg => {
                 let newMsgs = this.state.messages;
                 if(msg.user === this.state.username){
-                    newMsgs.push(<div data-aos='slide-left' data-aos-duration='220' data-aos-once='true' data-aos-offset='-10' key={this.state.messages.length+1}><span className='user message'>{msg.message}</span></div>);
+                    newMsgs.push(<Message key={this.state.messages.length+1} sender='user' message={msg.message} />);
                 }else{
-                    newMsgs.push(<div data-aos='slide-right' data-aos-duration='220' data-aos-once='true' data-aos-offset='-10' key={this.state.messages.length+1}><span className='other message'>{`${msg.user} : ${msg.message}`}</span></div>);
+                    newMsgs.push(<Message key={this.state.messages.length+1} sender='other' message={`${msg.user} : ${msg.message}`} />);
                 }
                 this.setState({messages: newMsgs});
             });
