@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
-import Header from './header';
-import Message from './message';
-import MessageView from './messageView.js';
+import Message from './MessageView/message';
+import MessageView from './MessageView/messageView';
 
 import config from '../../config';
 
