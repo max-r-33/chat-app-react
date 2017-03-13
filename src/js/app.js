@@ -61,13 +61,11 @@ class App extends React.Component {
     componentDidMount(){
         socket.on('connect', () => {
             socket.on('chat message', msg => {
-                let newMsgs = this.state.messages;
-                if(msg.user === this.state.username){
-                    newMsgs.push(<Message key={this.state.messages.length+1} sender='user' message={msg.message} />);
-                }else{
-                    newMsgs.push(<Message key={this.state.messages.length+1} sender='other' message={`${msg.user} : ${msg.message}`} />);
-                }
-                this.setState({messages: newMsgs});
+                let {messages} = this.state;
+                let senderClass = msg.user === this.state.username ? 'user' : 'other';
+                let newMessage = <Message key={this.state.messages.length+1} sender={senderClass} message={msg.message} />;
+                let newMessages = [...messages, newMessage];
+                this.setState({messages: newMessages});
             });
 
             socket.on('user join', userCount => {
@@ -84,7 +82,7 @@ class App extends React.Component {
                 }
                 setTimeout(()=>{
                     this.setState({typingStatus:''});
-                },1000)
+                }, 1000)
             })
         });
     }

@@ -7,7 +7,6 @@ export default class setupInputs extends React.Component{
 
     componentDidMount(){
         document.getElementById('name').focus();
-        console.log(this.props);
     }
 
     handleRoomNameSubmit(e){
