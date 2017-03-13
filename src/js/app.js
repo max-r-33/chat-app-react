@@ -90,15 +90,15 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <MessageView messages={this.state.messages}
-                             roomName={this.state.roomName}
-                             userCount={this.state.userCount}
-                             typingStatus={this.state.typingStatus}
-                             sendMessage={this.sendMessage.bind(this)}
-                             typingNotif={_.debounce(this.handleTyping.bind(this), 1000, true)}/>
+                <MessageView messages = {this.state.messages}
+                             roomName = {this.state.roomName}
+                             userCount = {this.state.userCount}
+                             typingStatus = {this.state.typingStatus}
+                             sendMessage = {this.sendMessage.bind(this)}
+                             typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}/>
                 <BackgroundLayers/>
-                <SetupInputs setRoomName={this.setRoomName.bind(this)}
-                             setUsername={this.setUsername.bind(this)}/>
+                <SetupInputs setRoomName = {this.setRoomName.bind(this)}
+                             setUsername = {this.setUsername.bind(this)}/>
             </div>
         )
     }
