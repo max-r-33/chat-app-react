@@ -32,7 +32,6 @@ io.on('connection', (socket) => {
 
     socket.on('user typing', (user) => {
         io.to(room).emit('user typing', user);
-        console.log('user typing', user);
     });
 
 });

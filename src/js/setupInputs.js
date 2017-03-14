@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {addUser} from '../ducks/userDuck.js';
+import {addRoom} from '../ducks/roomDuck.js';
 import {connect} from 'react-redux';
 
 class setupInputs extends React.Component{
@@ -14,7 +15,9 @@ class setupInputs extends React.Component{
 
     handleRoomNameSubmit(e){
         e.preventDefault();
+
         let roomName = document.getElementById('name').value;
+        this.props.dispatch(addRoom(roomName));
 
         //transitions background
         document.getElementById('2').style.opacity = 1;
@@ -62,4 +65,4 @@ class setupInputs extends React.Component{
     }
 }
 
-export default connect(state => ({storeUser: state.storeUser}))(setupInputs);
+export default connect(state => ({storeUser: state.storeUser, storeRoom: state.storeRoom}))(setupInputs);

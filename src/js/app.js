@@ -15,7 +15,6 @@ class app extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            roomName: '',
             messages: [],
             userCount: 0,
             typingStatus: ''
@@ -24,7 +23,6 @@ class app extends React.Component {
 
     //sets room name
     setRoomName(name) {
-        this.setState({roomName: name})
         socket.emit('room creation', name);
     }
 
@@ -37,7 +35,7 @@ class app extends React.Component {
             socket.emit('chat message', {
                 user: this.props.storeUser.name,
                 message: messageText,
-                room: this.state.roomName
+                room: this.props.storeRoom.name
             });
             document.getElementById('messageBox').value ='';
         }
@@ -83,7 +81,6 @@ class app extends React.Component {
         return (
             <div>
                 <MessageView messages = {this.state.messages}
-                             roomName = {this.state.roomName}
                              userCount = {this.state.userCount}
                              typingStatus = {this.state.typingStatus}
                              sendMessage = {this.sendMessage.bind(this)}
@@ -94,4 +91,4 @@ class app extends React.Component {
         )
     }
 }
-export default connect(state => ({storeUser: state.storeUser}))(app);
+export default connect(state => ({storeUser: state.storeUser, storeRoom: state.storeRoom}))(app);

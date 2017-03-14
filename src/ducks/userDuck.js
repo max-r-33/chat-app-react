@@ -14,11 +14,10 @@ export function removeUser(){
 export default function reducer(state = {}, action = {}){
     switch(action.type){
         case ADD_USER:
-            console.log(action.user);
             return Object.assign({}, state, {name:action.user});
         case REMOVE_USER:
-            return {};
+            return Object.assign({}, state, {});
         default:
-            return {};
+            return state;
     }
 }

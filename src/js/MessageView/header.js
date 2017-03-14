@@ -26,7 +26,7 @@ class header extends React.Component {
     render() {
         return (
             <header>
-                <p className='roomName'>{this.props.roomName}</p>
+                <p className='roomName'>{this.props.storeRoom.name}</p>
                 <p className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
                 <p className='userTyping'>{this.props.typingStatus}</p>
                 <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
@@ -35,4 +35,4 @@ class header extends React.Component {
     }
 }
 
-export default connect(state => ({storeUser : state.storeUser}))(header);
+export default connect(state => ({storeUser : state.storeUser, storeRoom : state.storeRoom}))(header);
