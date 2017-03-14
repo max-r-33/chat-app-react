@@ -4,12 +4,13 @@ const webpack = require('webpack');
 module.exports = {
     context: path.resolve(__dirname, './src'),
     entry: {
-        app: './js/app.js'
+        app: './js/client.js'
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
+                exclude: /node_modules/,
                 loader: "babel-loader"
             }, {
                 test: /\.css$/,

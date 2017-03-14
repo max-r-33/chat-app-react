@@ -2,7 +2,9 @@ import React from 'react';
 
 import Header from './header';
 
-export default class messageView extends React.Component{
+import {connect} from 'react-redux';
+
+class messageView extends React.Component{
     constructor(props){
         super(props)
     }
@@ -11,8 +13,7 @@ export default class messageView extends React.Component{
             <div className='messageView' id='msgView'>
 
                 {/* room header */}
-                <Header roomName={this.props.roomName}
-                        userCount={this.props.userCount}
+                <Header userCount={this.props.userCount}
                         typingStatus={this.props.typingStatus}/>
 
                 {/* message display */}
@@ -35,3 +36,5 @@ export default class messageView extends React.Component{
         )
     }
 }
+
+export default connect(state => ({user : state.user}))(messageView);
