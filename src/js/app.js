@@ -33,9 +33,9 @@ class app extends React.Component {
         if(messageText){
             //emits message
             socket.emit('chat message', {
-                user: this.props.storeUser.name,
+                user: this.props.user.name,
                 message: messageText,
-                room: this.props.storeRoom.name
+                room: this.props.room.name
             });
             document.getElementById('messageBox').value ='';
         }
@@ -43,7 +43,7 @@ class app extends React.Component {
 
     //emits the user typing event
     handleTyping(event){
-        socket.emit('user typing', this.props.storeUser.name);
+        socket.emit('user typing', this.props.user.name);
     }
 
     //handles all socket events
@@ -51,8 +51,8 @@ class app extends React.Component {
         socket.on('connect', () => {
             socket.on('chat message', msg => {
                 let {messages} = this.state;
-                let senderClass = msg.user === this.props.storeUser.name ? 'user' : 'other';
-                let msgText = msg.user === this.props.storeUser.name ? msg.message : msg.user + ' : ' + msg.message
+                let senderClass = msg.user === this.props.user.name ? 'user' : 'other';
+                let msgText = msg.user === this.props.user.name ? msg.message : msg.user + ' : ' + msg.message
                 let newMessage = <Message key={this.state.messages.length+1} sender={senderClass} message={msgText} />;
                 let newMessages = [...messages, newMessage];
                 this.setState({messages: newMessages});
@@ -67,7 +67,7 @@ class app extends React.Component {
             });
 
             socket.on('user typing', user => {
-                if(user !== this.props.storeUser.name){
+                if(user !== this.props.user.name){
                     this.setState({typingStatus : `${user} is typing`});
                 }
                 setTimeout(()=>{
@@ -78,6 +78,7 @@ class app extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div>
                 <MessageView messages = {this.state.messages}
@@ -91,4 +92,4 @@ class app extends React.Component {
         )
     }
 }
-export default connect(state => ({storeUser: state.storeUser, storeRoom: state.storeRoom}))(app);
+export default connect(state => ({user: state.user, room: state.room}))(app);

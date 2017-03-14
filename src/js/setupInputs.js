@@ -38,7 +38,7 @@ class setupInputs extends React.Component{
         //gets username and saves it to store
         let username = document.getElementById('messageUser').value;
         this.props.dispatch(addUser(username));
-        console.log(username)
+
         //transitions background
         document.getElementById('3').style.opacity = 1;
         document.getElementById('2').style.opacity = 0;
@@ -65,4 +65,4 @@ class setupInputs extends React.Component{
     }
 }
 
-export default connect(state => ({storeUser: state.storeUser, storeRoom: state.storeRoom}))(setupInputs);
+export default connect(state => ({user: state.user, room: state.room}))(setupInputs);

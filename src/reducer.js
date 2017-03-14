@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import storeUser from './ducks/userDuck';
-import storeRoom from './ducks/roomDuck';
+import user from './ducks/userDuck';
+import room from './ducks/roomDuck';
 
 export default combineReducers({
-    storeUser,
-    storeRoom
+    user,
+    room
 });

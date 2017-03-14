@@ -13,8 +13,7 @@ class messageView extends React.Component{
             <div className='messageView' id='msgView'>
 
                 {/* room header */}
-                <Header roomName={this.props.roomName}
-                        userCount={this.props.userCount}
+                <Header userCount={this.props.userCount}
                         typingStatus={this.props.typingStatus}/>
 
                 {/* message display */}
@@ -38,4 +37,4 @@ class messageView extends React.Component{
     }
 }
 
-export default connect(state => ({storeUser : state.storeUser}))(messageView);
+export default connect(state => ({user : state.user}))(messageView);

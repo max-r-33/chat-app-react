@@ -20,7 +20,7 @@ io.on('connection', (socket) => {
         room = roomName;
         var clients = io.sockets.adapter.rooms[roomName].sockets;
         io.to(room).emit('user join', io.sockets.adapter.rooms[room] ? io.sockets.adapter.rooms[room].length : 0);
-    })
+    });
 
     socket.on('disconnect', () => {
         io.to(room).emit('user disconnect', io.sockets.adapter.rooms[room] ? io.sockets.adapter.rooms[room].length : 0);
