@@ -1,13 +1,17 @@
 import React from 'react';
 import scrollToComponent from 'react-scroll-to-component';
 
-export default class header extends React.Component {
+import {connect} from 'react-redux';
+import {removeUser} from '../../ducks/userDuck';
+
+class header extends React.Component {
     constructor(props){
         super(props);
     }
 
     handleCloseClick(e){
         if(confirm('Are you sure you want to leave the chat room?')){
+            this.props.dispatch(removeUser(username));
             window.location.href='/';
         }
     }
@@ -30,3 +34,5 @@ export default class header extends React.Component {
         )
     }
 }
+
+export default connect(state => ({storeUser : state.storeUser}))(header);

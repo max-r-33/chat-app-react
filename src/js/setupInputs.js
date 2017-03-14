@@ -1,6 +1,9 @@
 import React from 'react';
 
-export default class setupInputs extends React.Component{
+import {addUser} from '../ducks/userDuck.js';
+import {connect} from 'react-redux';
+
+class setupInputs extends React.Component{
     constructor(props){
         super(props);
     }
@@ -29,8 +32,10 @@ export default class setupInputs extends React.Component{
     handleUsernameSubmit(e){
         e.preventDefault();
 
+        //gets username and saves it to store
         let username = document.getElementById('messageUser').value;
-
+        this.props.dispatch(addUser(username));
+        console.log(username)
         //transitions background
         document.getElementById('3').style.opacity = 1;
         document.getElementById('2').style.opacity = 0;
@@ -41,9 +46,6 @@ export default class setupInputs extends React.Component{
 
         //focuses messagBox
         document.getElementById('messageBox').focus();
-
-        //sets username
-        this.props.setUsername(username);
     }
 
     render(){
@@ -59,3 +61,5 @@ export default class setupInputs extends React.Component{
         )
     }
 }
+
+export default connect(state => ({storeUser: state.storeUser}))(setupInputs);

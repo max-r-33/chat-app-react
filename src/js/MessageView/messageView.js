@@ -2,7 +2,9 @@ import React from 'react';
 
 import Header from './header';
 
-export default class messageView extends React.Component{
+import {connect} from 'react-redux';
+
+class messageView extends React.Component{
     constructor(props){
         super(props)
     }
@@ -35,3 +37,5 @@ export default class messageView extends React.Component{
         )
     }
 }
+
+export default connect(state => ({storeUser : state.storeUser}))(messageView);
