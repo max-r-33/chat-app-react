@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 
 import store from '../store';
 
-import App from './app';
+import App from './Main/app';
 
 import reset from '../styles/reset.scss';
 import style from '../styles/styles.scss';

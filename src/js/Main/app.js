@@ -7,7 +7,7 @@ import MessageView from './MessageView/messageView';
 
 import {connect} from 'react-redux';
 
-import config from '../../config';
+import config from '../../../config';
 import io from 'socket.io-client'
 let socket = io(config.socketURL);
 
@@ -78,7 +78,6 @@ class app extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <div>
                 <MessageView messages = {this.state.messages}

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {addUser} from '../ducks/userDuck.js';
-import {addRoom} from '../ducks/roomDuck.js';
+import {addUser} from '../../ducks/userDuck.js';
+import {addRoom} from '../../ducks/roomDuck.js';
 import {connect} from 'react-redux';
 
 class setupInputs extends React.Component{
