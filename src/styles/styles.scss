@@ -205,3 +205,46 @@ input:focus {
         }
     }
 }
+
+//ProgressBar
+.progressBar{
+    position:relative;
+    top:450px;
+    display:flex;
+    flex-direction: column;
+    width:350px;
+    margin:auto;
+
+    .line{
+        height:1px;
+        background-color:#4C5454;
+        width:300px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin:auto;
+
+        .indicator{
+            height:20px;
+            width:20px;
+            background-color:#4C5454;
+            border-radius: 20px;
+        }
+    }
+
+    .textContainer{
+        font-size:13px;
+        padding-top:18px;
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .progressLabel{
+            opacity:.33;
+            transition:all .5s ease-in-out;
+        }
+        .active{
+            opacity:1;
+        }
+    }
+}

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "animejs": "^2.0.1",
     "body-parser": "^1.16.1",
     "cors": "^2.8.1",
     "express": "^4.14.1",
