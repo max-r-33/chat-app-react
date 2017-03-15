@@ -27,7 +27,9 @@
   },
   "name": "chat-app-react",
   "scripts": {
-    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --progress --colors --inline"
+    "start": "webpack -w --progress",
+    "serve": "nodemon",
+    "build": "webpack -p --progress"
   },
   "version": "1.0.0",
   "main": "index.js",
