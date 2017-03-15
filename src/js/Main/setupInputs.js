@@ -25,6 +25,7 @@ class setupInputs extends React.Component{
             elasticity: 90,
             duration:1000
         });
+
         this.refs.progressBar.advance();
 
         let roomName = document.getElementById('name').value;
@@ -60,6 +61,16 @@ class setupInputs extends React.Component{
         //gets username and saves it to store
         let username = document.getElementById('messageUser').value;
         this.props.dispatch(addUser(username));
+
+        // setTimeout(() => {
+        //     anime({
+        //         targets:'.progressBar',
+        //         translateY: -300,
+        //         elasticity: 0,
+        //         duration:1000
+        //     });
+        // }, 1000)
+
 
         setTimeout(() => {
             //transitions background
