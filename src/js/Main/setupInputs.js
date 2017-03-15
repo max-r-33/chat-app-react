@@ -22,7 +22,7 @@ class setupInputs extends React.Component{
         anime({
             targets:'.indicator',
             translateX: 136,
-            elasticity: 150,
+            elasticity: 90,
             duration:1000
         });
         this.refs.progressBar.advance();
@@ -50,7 +50,7 @@ class setupInputs extends React.Component{
         anime({
             targets:'.indicator',
             translateX: 290,
-            elasticity: 150,
+            elasticity: 90,
             duration:1000
         });
         this.refs.progressBar.advance();
