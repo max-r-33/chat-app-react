@@ -4,6 +4,8 @@ import {addUser} from '../../ducks/userDuck.js';
 import {addRoom} from '../../ducks/roomDuck.js';
 import {connect} from 'react-redux';
 
+import InfoBox from './infoBox';
+
 class setupInputs extends React.Component{
     constructor(props){
         super(props);
@@ -54,6 +56,7 @@ class setupInputs extends React.Component{
     render(){
         return (
             <section>
+                <InfoBox infoText='Enter the name of your chat room here.' />
                 <form onSubmit={event => this.handleRoomNameSubmit(event)} className='roomNameContainer'>
                     <input autoComplete='off' type='text' id='name' placeholder='chat room name' />
                 </form>
