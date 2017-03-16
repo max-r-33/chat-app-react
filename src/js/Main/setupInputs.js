@@ -71,12 +71,11 @@ class setupInputs extends React.Component{
         //     });
         // }, 1000)
 
-
+        document.getElementById('3').style.opacity = 1;
+        document.getElementById('2').style.opacity = 0;
         setTimeout(() => {
             //transitions background
             document.getElementsByClassName('progressBar')[0].style.display = 'none';
-            document.getElementById('3').style.opacity = 1;
-            document.getElementById('2').style.opacity = 0;
 
             //hides username input and shows message view
             document.getElementById('msgView').style.opacity = 1;
