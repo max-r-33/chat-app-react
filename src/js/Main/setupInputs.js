@@ -18,14 +18,6 @@ class setupInputs extends React.Component{
     handleRoomNameSubmit(e){
         e.preventDefault();
 
-        //moves progressBar
-        anime({
-            targets:'.indicator',
-            translateX: 136,
-            elasticity: 90,
-            duration:1000
-        });
-
         this.refs.progressBar.advance();
 
         let roomName = document.getElementById('name').value;
@@ -46,14 +38,6 @@ class setupInputs extends React.Component{
 
     handleUsernameSubmit(e){
         e.preventDefault();
-
-        //moves progressbar
-        anime({
-            targets:'.indicator',
-            translateX: 290,
-            elasticity: 90,
-            duration:1000
-        });
         this.refs.progressBar.advance();
 
         document.getElementById('username').style.display = 'none';
@@ -61,15 +45,6 @@ class setupInputs extends React.Component{
         //gets username and saves it to store
         let username = document.getElementById('messageUser').value;
         this.props.dispatch(addUser(username));
-
-        // setTimeout(() => {
-        //     anime({
-        //         targets:'.progressBar',
-        //         translateY: -300,
-        //         elasticity: 0,
-        //         duration:1000
-        //     });
-        // }, 1000)
 
         document.getElementById('3').style.opacity = 1;
         document.getElementById('2').style.opacity = 0;
@@ -94,7 +69,7 @@ class setupInputs extends React.Component{
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoComplete="off" id='messageUser' type='text' placeholder='username' />
                 </form>
-                <ProgressBar ref='progressBar'/>
+                <ProgressBar labelText={['Room Name', 'Username', 'Creating room']} ref='progressBar'/>
             </section>
         )
     }

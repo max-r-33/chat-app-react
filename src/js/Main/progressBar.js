@@ -1,17 +1,50 @@
 import React from 'react';
+import anime from 'animejs';
+import ProgressBarLabel from './progressBarLabel';
 
 export default class progressBar extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            active : 1
+            active : 0,
+            duration : 1000,
+            elasticity : 90,
+            width: 300
         }
     }
+
+    componentWillMount(){
+        this.setState({labels : this.props.labelText.map((t, i) => {
+                 return <ProgressBarLabel key={i}
+                                          active={this.state.active}
+                                          elemNumber={i}
+                                          text={t} />
+                })
+        })
+    }
+
     advance(){
+        console.log(this.state.active + ' new active ' + (this.state.active+1));
         let {active} = this.state;
         active++;
         this.setState({active});
+        anime({
+            targets:'.indicator',
+            translateX: ((this.state.width/2)*(this.state.active+1)-15),
+            elasticity : this.state.elasticity,
+            duration : this.state.duration
+        });
+
+        this.setState({labels : this.props.labelText.map((t, i) => {
+                 return <ProgressBarLabel key={i}
+                                          active={this.state.active + 1}
+                                          elemNumber={i}
+                                          text={t} />
+                })
+        })
+
     }
+
     render(){
         return (
             <div ref='progressBar' className='progressBar'>
@@ -20,9 +53,7 @@ export default class progressBar extends React.Component{
                     </div>
                 </div>
                 <div className='textContainer'>
-                    <div className={`progressLabel ${this.state.active === 1 ? 'active' : ''}`}>Room Name</div>
-                    <div className={`progressLabel ${this.state.active === 2 ? 'active' : ''}`}>Username</div>
-                    <div className={`progressLabel ${this.state.active === 3 ? 'active' : ''}`}>Creating room</div>
+                    {this.state.labels}
                 </div>
             </div>
         );
