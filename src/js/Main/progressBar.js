@@ -15,19 +15,15 @@ export default class progressBar extends React.Component{
 
     componentWillMount(){
         this.setState({labels : this.props.labelText.map((t, i) => {
-                 return <ProgressBarLabel key={i}
-                                          active={this.state.active}
-                                          elemNumber={i}
-                                          text={t} />
-                })
-        })
+                return <ProgressBarLabel key={i} active={this.state.active} elemNumber={i} text={t} />
+        })});
     }
 
     advance(){
-        console.log(this.state.active + ' new active ' + (this.state.active+1));
         let {active} = this.state;
         active++;
         this.setState({active});
+
         anime({
             targets:'.indicator',
             translateX: ((this.state.width/2)*(this.state.active+1)-15),
@@ -36,13 +32,8 @@ export default class progressBar extends React.Component{
         });
 
         this.setState({labels : this.props.labelText.map((t, i) => {
-                 return <ProgressBarLabel key={i}
-                                          active={this.state.active + 1}
-                                          elemNumber={i}
-                                          text={t} />
-                })
-        })
-
+            return <ProgressBarLabel key={i} active={this.state.active + 1} elemNumber={i} text={t} />
+        })});
     }
 
     render(){

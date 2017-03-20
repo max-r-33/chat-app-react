@@ -1,6 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
+function getDevTool() {
+    return process.env.NODE_ENV !== 'production' ? 'source-map' : false;
+}
+
 module.exports = {
     context: path.resolve(__dirname, './src'),
     entry: {
@@ -28,6 +32,7 @@ module.exports = {
             }
         ]
     },
+    devtool: getDevTool(),
     output: {
         path: path.resolve(__dirname, './src/dist'),
         filename: '[name].bundle.js'
