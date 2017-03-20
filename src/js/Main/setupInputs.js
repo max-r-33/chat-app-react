@@ -1,6 +1,6 @@
 import React from 'react';
 import anime from 'animejs';
-import ProgressBar from './progressBar';
+import ProgressBar from './ProgressBar/progressBar';
 
 import {addUser} from '../../ducks/userDuck.js';
 import {addRoom} from '../../ducks/roomDuck.js';
