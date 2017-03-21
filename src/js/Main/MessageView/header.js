@@ -2,7 +2,7 @@ import React from 'react';
 import scrollToComponent from 'react-scroll-to-component';
 
 import {connect} from 'react-redux';
-import {removeUser} from '../../../ducks/userDuck';
+import {removeUser} from '../../ducks/userDuck';
 
 class header extends React.Component {
     constructor(props){
