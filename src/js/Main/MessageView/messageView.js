@@ -1,13 +1,21 @@
 import React from 'react';
-
 import Header from './header';
-
+import scrollToComponent from 'react-scroll-to-component';
 import {connect} from 'react-redux';
+
 
 class messageView extends React.Component{
     constructor(props){
         super(props)
     }
+
+    componentDidUpdate(){
+        scrollToComponent(this.refs.msg, {
+            offset: 2000,
+            duration:100
+        });
+    }
+
     render(){
         return (
             <div className='messageView' id='msgView'>
@@ -17,7 +25,7 @@ class messageView extends React.Component{
                         typingStatus={this.props.typingStatus}/>
 
                 {/* message display */}
-                <div className='messagesDisplay'>
+                <div className='messagesDisplay' id='msgDisplay'>
                     <div ref='msg'>
                         {this.props.messages}
                     </div>

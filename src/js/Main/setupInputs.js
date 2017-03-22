@@ -12,7 +12,14 @@ class setupInputs extends React.Component{
     }
 
     componentDidMount(){
-        document.getElementById('name').focus();
+        document.getElementById('roomName').focus();
+    }
+
+    blurAll(){
+         var tmp = document.createElement("input");
+         document.body.appendChild(tmp);
+         tmp.focus();
+         document.body.removeChild(tmp);
     }
 
     handleRoomNameSubmit(e){
@@ -20,7 +27,7 @@ class setupInputs extends React.Component{
 
         this.refs.progressBar.advance();
 
-        let roomName = document.getElementById('name').value;
+        let roomName = document.getElementById('roomName').value;
         this.props.dispatch(addRoom(roomName));
 
         //transitions background
@@ -28,7 +35,7 @@ class setupInputs extends React.Component{
         document.getElementById('1').style.opacity = 0;
 
         //hides room name input, shows username input and sets focus
-        document.getElementById('name').style.display = 'none';
+        document.getElementById('roomName').style.display = 'none';
         document.getElementById('username').style.display = 'inline';
         document.getElementById('messageUser').focus();
 
@@ -64,10 +71,10 @@ class setupInputs extends React.Component{
         return (
             <section>
                 <form onSubmit={event => this.handleRoomNameSubmit(event)} className='roomNameContainer'>
-                    <input autoComplete='off' type='text' id='name' placeholder='chat room name' />
+                    <input autoCorrect='off' autoCapitalize='none' autoComplete='off' type='text' id='roomName' placeholder='chat room name' />
                 </form>
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
-                    <input autoComplete="off" id='messageUser' type='text' placeholder='username' />
+                    <input autoCorrect='off' autoCapitalize='none' autoComplete="off" id='messageUser' type='text' placeholder='username' />
                 </form>
                 <ProgressBar labelText={['Room Name', 'Username', 'Creating room']} ref='progressBar'/>
             </section>

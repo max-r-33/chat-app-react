@@ -16,13 +16,6 @@ class header extends React.Component {
         }
     }
 
-    componentDidUpdate(){
-        scrollToComponent(this.refs.msg,{
-            offset: 1000,
-            duration:100
-        });
-    }
-
     render() {
         return (
             <header>
