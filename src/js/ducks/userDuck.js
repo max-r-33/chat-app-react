@@ -11,6 +11,7 @@ export function removeUser(){
     return {type: REMOVE_USER};
 }
 
+//reducer
 export default function reducer(state = {}, action = {}){
     switch(action.type){
         case ADD_USER:
