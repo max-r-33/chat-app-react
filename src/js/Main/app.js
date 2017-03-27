@@ -7,7 +7,7 @@ import SetupInputs from './setupInputs';
 import Message from './MessageView/message';
 import MessageView from './MessageView/messageView';
 
-let socket = io(document.location.protocol+'//'+document.location.host);
+let socket = io(document.location.protocol + '//' + document.location.host);
 
 class app extends React.Component {
     constructor(props) {
@@ -37,6 +37,10 @@ class app extends React.Component {
             });
             document.getElementById('messageBox').value ='';
         }
+        let {messages} = this.state;
+        let newMessage = <Message key={this.state.messages.length+1} sender='user' message={messageText} />;
+        let newMessages = [...messages, newMessage];
+        this.setState({messages:newMessages});
     }
 
     //emits the user typing event
@@ -48,12 +52,13 @@ class app extends React.Component {
     componentDidMount(){
         socket.on('connect', () => {
             socket.on('chat message', msg => {
-                let {messages} = this.state;
-                let senderClass = msg.user === this.props.user.name ? 'user' : 'other';
-                let msgText = msg.user === this.props.user.name ? msg.message : msg.user + ' : ' + msg.message
-                let newMessage = <Message key={this.state.messages.length+1} sender={senderClass} message={msgText} />;
-                let newMessages = [...messages, newMessage];
-                this.setState({messages: newMessages});
+                if(msg.user !== this.props.user.name){
+                    let {messages} = this.state;
+                    let msgText = msg.user + ' : ' + msg.message;
+                    let newMessage = <Message key={this.state.messages.length+1} sender='other' message={msgText} />;
+                    let newMessages = [...messages, newMessage];
+                    this.setState({messages: newMessages});
+                }
             });
 
             socket.on('user join', userCount => {
