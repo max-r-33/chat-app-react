@@ -1,16 +1,13 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import io from 'socket.io-client';
 
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Message from './MessageView/message';
 import MessageView from './MessageView/messageView';
 
-import {connect} from 'react-redux';
-
-import config from '../../../config';
-import io from 'socket.io-client';
-
-let socket = io(config.socketURL);
+let socket = io(document.location.protocol+'//'+document.location.host);
 
 class app extends React.Component {
     constructor(props) {

@@ -7,7 +7,6 @@
     "react": "next",
     "react-dom": "next",
     "react-redux": "^5.0.3",
-    "react-router": "^3.0.2",
     "react-scroll-to-component": "^1.0.0",
     "redux": "^3.6.0",
     "socket.io": "^1.7.3",
@@ -28,7 +27,7 @@
   },
   "name": "chat-app-react",
   "scripts": {
-    "start": "webpack -w --progress",
+    "start": "node index.js",
     "serve": "nodemon",
     "build": "webpack -p --progress"
   },
