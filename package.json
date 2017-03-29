@@ -29,6 +29,7 @@
   "scripts": {
     "start": "node index.js",
     "serve": "nodemon",
+    "dev": "webpack -w",
     "build": "webpack -p --progress"
   },
   "version": "1.0.0",
