@@ -64,6 +64,7 @@ class setupInputs extends React.Component{
 
             //focuses messagBox
             document.getElementById('messageBox').focus();
+            this.props.setUserName(username);
         },1000);
     }
 

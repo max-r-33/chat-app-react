@@ -20,7 +20,7 @@ class header extends React.Component {
         return (
             <header>
                 <p className='roomName'>{this.props.room.name}</p>
-                <p className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
+                <p onClick={this.props.getUsers} className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
                 <p className='userTyping'>{this.props.typingStatus}</p>
                 <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
             </header>

@@ -2,13 +2,35 @@ import React from 'react';
 import {connect} from 'react-redux';
 import io from 'socket.io-client';
 
+import Modal from 'react-modal';
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Message from './MessageView/message';
 import MessageView from './MessageView/messageView';
 
 let socket = io(document.location.protocol + '//' + document.location.host);
+let styles = {
+  overlay : {
+    position          : 'fixed',
+    top               : 0,
+    left              : 0,
+    right             : 0,
+    bottom            : 0,
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  },
+  content : {
+    top                        : '100px',
+    bottom                     : '100px',
+    border                     : '1px solid #ccc',
+    background                 : '#fff',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px'
 
+  }
+}
 class app extends React.Component {
     constructor(props) {
         super(props);
@@ -21,7 +43,14 @@ class app extends React.Component {
 
     //sets room name
     setRoomName(name) {
-        socket.emit('room creation', name);
+        this.setState({
+            room: name
+        })
+    }
+
+    //sets username and emits event
+    setUserName(username) {
+        socket.emit('room creation', {roomname: this.state.room, username: username});
     }
 
     //emits send message event
@@ -77,7 +106,28 @@ class app extends React.Component {
                     this.setState({typingStatus:''});
                 }, 1000)
             })
-        });
+
+            socket.on('user list', l => {
+                // this.setState({usersInRoom: l.filter(e => e.roomName === this.state.room)})
+                let usersInRoom = l.filter(e => e.roomName === this.state.room).map(x => {
+                    return (
+                        <div>
+                            <p>{x.username}</p>
+                        </div>
+                    )
+                })
+                this.setState({usersInRoom});
+            });
+        })
+    }
+
+    getUsers(){
+        socket.emit('get users')
+        this.setState({modalIsOpen: !this.state.modalIsOpen});
+    }
+
+    closeModal(){
+        this.setState({modalIsOpen: !this.state.modalIsOpen});
     }
 
     render() {
@@ -87,9 +137,16 @@ class app extends React.Component {
                              userCount = {this.state.userCount}
                              typingStatus = {this.state.typingStatus}
                              sendMessage = {this.sendMessage.bind(this)}
-                             typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}/>
+                             typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}
+                             getUsers = {this.getUsers.bind(this)}/>
                 <BackgroundLayers/>
-                <SetupInputs setRoomName = {this.setRoomName.bind(this)} />
+                <SetupInputs setRoomName = {this.setRoomName.bind(this)}
+                             setUserName = {this.setUserName.bind(this)}/>
+                <Modal isOpen={this.state.modalIsOpen} contentLabel='users in room' style={styles}>
+                    <button onClick={this.closeModal.bind(this)}>X</button>
+                    <h1>Users in {this.state.room}</h1>
+                    {this.state.usersInRoom}
+                </Modal>
             </div>
         )
     }
