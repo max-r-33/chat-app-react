@@ -11,17 +11,21 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+let users = [];
+
 io.on('connection', socket => {
     let room;
 
-    socket.on('room creation', roomName => {
-        socket.join(roomName);
-        room = roomName;
-        io.to(room).emit('user join', io.sockets.adapter.rooms[room] ? io.sockets.adapter.rooms[room].length : 0);
+    socket.on('room creation', r => {
+        socket.join(r.name);
+        room = r.name;
+        users.push({roomname: room, username: r.user, id: socket.id});
+        io.to(room).emit('user join', io.sockets.adapter.rooms[room] ? users : 0);
     });
 
     socket.on('disconnect', () => {
-        io.to(room).emit('user disconnect', io.sockets.adapter.rooms[room] ? io.sockets.adapter.rooms[room].length : 0);
+        users = users.filter(u => u.id !== socket.id)
+        io.to(room).emit('user disconnect', io.sockets.adapter.rooms[room] ? users : 0);
     });
 
     socket.on('chat message', msg => {

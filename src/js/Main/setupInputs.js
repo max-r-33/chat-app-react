@@ -15,13 +15,6 @@ class setupInputs extends React.Component{
         document.getElementById('roomName').focus();
     }
 
-    blurAll(){
-         var tmp = document.createElement("input");
-         document.body.appendChild(tmp);
-         tmp.focus();
-         document.body.removeChild(tmp);
-    }
-
     handleRoomNameSubmit(e){
         e.preventDefault();
 
@@ -38,9 +31,6 @@ class setupInputs extends React.Component{
         document.getElementById('roomName').style.display = 'none';
         document.getElementById('username').style.display = 'inline';
         document.getElementById('messageUser').focus();
-
-        //sets roomname
-        this.props.setRoomName(roomName);
     }
 
     handleUsernameSubmit(e){
@@ -52,7 +42,7 @@ class setupInputs extends React.Component{
         //gets username and saves it to store
         let username = document.getElementById('messageUser').value;
         this.props.dispatch(addUser(username));
-
+        this.props.setUpRoom(this.props.room.name, username);
         document.getElementById('3').style.opacity = 1;
         document.getElementById('2').style.opacity = 0;
         setTimeout(() => {

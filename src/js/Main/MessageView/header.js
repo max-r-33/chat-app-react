@@ -17,6 +17,7 @@ class header extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <header>
                 <p className='roomName'>{this.props.room.name}</p>
