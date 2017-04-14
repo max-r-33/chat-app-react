@@ -19,9 +19,8 @@ class app extends React.Component {
         }
     }
 
-    //sets room name
-    setRoomName(name) {
-        socket.emit('room creation', name);
+    setUpRoom(roomName, username){
+        socket.emit('room creation', {name: roomName, user: username})
     }
 
     //emits send message event
@@ -61,12 +60,14 @@ class app extends React.Component {
                 }
             });
 
-            socket.on('user join', userCount => {
-                this.setState({userCount});
+            socket.on('user join', users => {
+                let usersInRoom = users.filter(u => u.roomname === this.props.room.name)
+                this.setState({userCount: usersInRoom.length, usersInRoom});
             });
 
-            socket.on('user disconnect', userCount => {
-                this.setState({userCount});
+            socket.on('user disconnect', users => {
+                let usersInRoom = users.filter(u => u.roomname === this.props.room.name)
+                this.setState({usersInRoom, userCount: usersInRoom.length});
             });
 
             socket.on('user typing', user => {
@@ -85,11 +86,12 @@ class app extends React.Component {
             <div>
                 <MessageView messages = {this.state.messages}
                              userCount = {this.state.userCount}
+                             usersInRoom = {this.state.usersInRoom}
                              typingStatus = {this.state.typingStatus}
                              sendMessage = {this.sendMessage.bind(this)}
                              typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}/>
-                <BackgroundLayers/>
-                <SetupInputs setRoomName = {this.setRoomName.bind(this)} />
+                <BackgroundLayers />
+                <SetupInputs setUpRoom = {this.setUpRoom}/>
             </div>
         )
     }

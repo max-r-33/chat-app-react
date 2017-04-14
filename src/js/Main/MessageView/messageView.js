@@ -21,7 +21,8 @@ class messageView extends React.Component{
             <div className='messageView' id='msgView'>
 
                 {/* room header */}
-                <Header userCount={this.props.userCount}
+                <Header usersInRoom={this.props.usersInRoom}
+                        userCount={this.props.userCount}
                         typingStatus={this.props.typingStatus}/>
 
                 {/* message display */}
