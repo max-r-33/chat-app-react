@@ -146,8 +146,20 @@ input:focus {
             position:absolute;
             right:20px;
             top:50%;
+            text-align: center;
             transform:translate(0, -50%);
             cursor:pointer;
+            border:1px solid $color;
+            border-radius:20px;
+            padding:3px;
+            height:24px;
+            width:24px;
+            line-height:12px;
+            opacity:.6;
+            transition: opacity .5s ease-in-out;
+        }
+        .leave:hover{
+            opacity: 1;
         }
 
         .userTyping{

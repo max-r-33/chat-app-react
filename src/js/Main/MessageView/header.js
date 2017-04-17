@@ -13,10 +13,12 @@ const modalStyle = {
   content : {
     top                        : '100px',
     bottom                     : '100px',
-    background                 : '#fff',
+    background                 : '#e6e9f0',
     borderRadius               : '1px',
     padding                    : '20px',
-    border                     : '1px solid #4C5454'
+    border                     : '1px solid #4C5454',
+    margin                     : 'auto',
+    maxWidth                   : '300px'
   }
 }
 
@@ -52,9 +54,9 @@ class header extends React.Component {
                 <p className='roomName'>{this.props.room.name}</p>
                 <p onClick={this.toggleModal.bind(this)} className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
                 <p className='userTyping'>{this.props.typingStatus}</p>
-                <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
+                <p onClick={event => this.handleCloseClick(event)} className='leave'>×</p>
                 <Modal style={modalStyle} contentLabel='Users in room' isOpen={this.state.showModal}>
-                    <div className='leave' onClick={this.toggleModal.bind(this)}>X</div>
+                    <div className='leave' onClick={this.toggleModal.bind(this)}>×</div>
                     {this.state.userElems}
                 </Modal>
             </header>
