@@ -100,6 +100,37 @@ input:focus {
 //------------------
 //message view styles
 //------------------
+.modal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 100px;
+    bottom                     : 100px;
+    background-color           : #e6e9f0;
+    border-radius              : 1px;
+    padding                    : 20px;
+    border                     : 1px solid #4C5454;
+    margin                     : auto;
+    max-width                  : 300px;
+    text-align                 : center;
+    outline                    : none;
+    .userListing{
+        display:block;
+        font-weight:300;
+        font-size:15px;
+    }
+}
+.overlay {
+    background: rgba(40, 46, 48, 0.66);
+    z-index: 1000;
+    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    outline: non;
+}
 .messageView{
     opacity:0;
     transition: all $transitionTime ease-in-out;
@@ -167,7 +198,6 @@ input:focus {
             margin-top:3px;
         }
     }
-
     //styles for messages display window
     .messagesDisplay {
         margin-top:70px;

@@ -23,23 +23,23 @@ class app extends React.Component {
         socket.emit('room creation', {name: roomName, user: username})
     }
 
-    //emits send message event
+    //emits send message event if message is not blank
     //appends message to window
     sendMessage(event, messageText){
         event.preventDefault();
         if(messageText){
-            //emits message
             socket.emit('chat message', {
                 user: this.props.user.name,
                 message: messageText,
                 room: this.props.room.name
             });
             document.getElementById('messageBox').value ='';
+            //adding message to state
+            let {messages} = this.state;
+            let newMessage = <Message key={this.state.messages.length+1} sender='user' message={messageText} />;
+            let newMessages = [...messages, newMessage];
+            this.setState({messages:newMessages});
         }
-        let {messages} = this.state;
-        let newMessage = <Message key={this.state.messages.length+1} sender='user' message={messageText} />;
-        let newMessages = [...messages, newMessage];
-        this.setState({messages:newMessages});
     }
 
     //emits the user typing event

@@ -5,23 +5,6 @@ import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import {removeUser} from '../../ducks/userDuck';
 
-const modalStyle = {
-  overlay : {
-    backgroundColor   : 'rgba(40, 46, 48, 0.66)',
-    zIndex            : '1000',
-  },
-  content : {
-    top                        : '100px',
-    bottom                     : '100px',
-    background                 : '#e6e9f0',
-    borderRadius               : '1px',
-    padding                    : '20px',
-    border                     : '1px solid #4C5454',
-    margin                     : 'auto',
-    maxWidth                   : '300px'
-  }
-}
-
 class header extends React.Component {
     constructor(props){
         super(props);
@@ -43,7 +26,7 @@ class header extends React.Component {
 
     componentWillReceiveProps(nextProps){
         if(nextProps.usersInRoom !== this.props.usersInRoom){
-            let userElems = nextProps.usersInRoom.map((u, i) => <p key={i}>{u.username}</p>);
+            let userElems = nextProps.usersInRoom.map((u, i) => <p className='userListing' key={i}>{u.username}</p>);
             this.setState({userElems})
         }
     }
@@ -55,7 +38,7 @@ class header extends React.Component {
                 <p onClick={this.toggleModal.bind(this)} className='peopleCount'>{`${this.props.userCount} ${this.props.userCount > 1 ? 'users' : 'user'} in the room`}</p>
                 <p className='userTyping'>{this.props.typingStatus}</p>
                 <p onClick={event => this.handleCloseClick(event)} className='leave'>×</p>
-                <Modal style={modalStyle} contentLabel='Users in room' isOpen={this.state.showModal}>
+                <Modal className='modal' overlayClassName='overlay' contentLabel='Users in room' isOpen={this.state.showModal}>
                     <div className='leave' onClick={this.toggleModal.bind(this)}>×</div>
                     {this.state.userElems}
                 </Modal>
