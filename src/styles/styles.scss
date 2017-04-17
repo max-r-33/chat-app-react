@@ -114,8 +114,8 @@ input:focus {
         background-color: rgb(108, 115,123);
         display: flex;
         flex-direction: column;
-        text-align: center;
         justify-content: center;
+        align-items: center;
         margin-bottom:5px;
         z-index:999;
         color:$color;
@@ -123,6 +123,15 @@ input:focus {
         .peopleCount {
             font-size: 12px;
             margin-top: 5px;
+            opacity:.6;
+            border-bottom:.5px solid;
+            padding-bottom:1px;
+            cursor:pointer;
+            transition:opacity .5s ease-in-out;
+        }
+
+        .peopleCount:hover{
+            opacity:1;
         }
 
         .roomName {

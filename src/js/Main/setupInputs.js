@@ -15,46 +15,65 @@ class setupInputs extends React.Component{
         document.getElementById('roomName').focus();
     }
 
+    onError(element){
+        anime({
+            targets:element,
+            translateX: {
+                value: '+=1000px',
+                elasticity:500,
+            },
+            duration:30,
+            loop:2,
+            direction: 'alternate'
+        });
+    }
+
     handleRoomNameSubmit(e){
         e.preventDefault();
-
-        this.refs.progressBar.advance();
-
         let roomName = document.getElementById('roomName').value;
-        this.props.dispatch(addRoom(roomName));
+        if(roomName){
+            this.refs.progressBar.advance();
+            this.props.dispatch(addRoom(roomName));
 
-        //transitions background
-        document.getElementById('2').style.opacity = 1;
-        document.getElementById('1').style.opacity = 0;
+            //transitions background
+            document.getElementById('2').style.opacity = 1;
+            document.getElementById('1').style.opacity = 0;
 
-        //hides room name input, shows username input and sets focus
-        document.getElementById('roomName').style.display = 'none';
-        document.getElementById('username').style.display = 'inline';
-        document.getElementById('messageUser').focus();
+            //hides room name input, shows username input and sets focus
+            document.getElementById('roomName').style.display = 'none';
+            document.getElementById('username').style.display = 'inline';
+            document.getElementById('messageUser').focus();
+        }else{
+            this.onError('#roomName')
+        }
     }
 
     handleUsernameSubmit(e){
         e.preventDefault();
-        this.refs.progressBar.advance();
-
-        document.getElementById('username').style.display = 'none';
-
-        //gets username and saves it to store
         let username = document.getElementById('messageUser').value;
-        this.props.dispatch(addUser(username));
-        this.props.setUpRoom(this.props.room.name, username);
-        document.getElementById('3').style.opacity = 1;
-        document.getElementById('2').style.opacity = 0;
-        setTimeout(() => {
-            //transitions background
-            document.getElementsByClassName('progressBar')[0].style.display = 'none';
+        if(username){
+            this.refs.progressBar.advance();
 
-            //hides username input and shows message view
-            document.getElementById('msgView').style.opacity = 1;
+            document.getElementById('username').style.display = 'none';
 
-            //focuses messagBox
-            document.getElementById('messageBox').focus();
-        },1000);
+            //gets username and saves it to store
+            this.props.dispatch(addUser(username));
+            this.props.setUpRoom(this.props.room.name, username);
+            document.getElementById('3').style.opacity = 1;
+            document.getElementById('2').style.opacity = 0;
+            setTimeout(() => {
+                //transitions background
+                document.getElementsByClassName('progressBar')[0].style.display = 'none';
+
+                //hides username input and shows message view
+                document.getElementById('msgView').style.opacity = 1;
+
+                //focuses messagBox
+                document.getElementById('messageBox').focus();
+            },1000);
+        }else{
+            this.onError('#messageUser')
+        }
     }
 
     render(){

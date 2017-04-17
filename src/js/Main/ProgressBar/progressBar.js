@@ -7,8 +7,8 @@ export default class progressBar extends React.Component{
         super(props);
         this.state = {
             active : 0,
-            duration : 1000,
-            elasticity : 90,
+            duration : 800,
+            elasticity : 40,
             width: 300
         }
     }
