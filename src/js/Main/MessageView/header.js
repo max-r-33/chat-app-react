@@ -42,15 +42,11 @@ class header extends React.Component {
     componentWillReceiveProps(nextProps){
         if(nextProps.usersInRoom !== this.props.usersInRoom){
             let userElems = nextProps.usersInRoom.map((u, i) => <p key={i}>{u.username}</p>);
-            console.log('new user props!!!');
             this.setState({userElems})
-        }else{
-            console.log('no change in users');
         }
     }
 
     render() {
-        console.log(this.props);
         return (
             <header>
                 <p className='roomName'>{this.props.room.name}</p>
@@ -58,7 +54,7 @@ class header extends React.Component {
                 <p className='userTyping'>{this.props.typingStatus}</p>
                 <p onClick={event => this.handleCloseClick(event)} className='leave'>x</p>
                 <Modal style={modalStyle} contentLabel='Users in room' isOpen={this.state.showModal}>
-                    <button onClick={this.toggleModal.bind(this)}>X</button>
+                    <div className='leave' onClick={this.toggleModal.bind(this)}>X</div>
                     {this.state.userElems}
                 </Modal>
             </header>
