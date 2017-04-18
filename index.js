@@ -17,6 +17,10 @@ io.on('connection', socket => {
     let room;
 
     socket.on('room creation', r => {
+        let usersInRoom = users.filter(u => u.username === r.user);
+        if(usersInRoom.length){
+            io.to(socket.id).emit('username in use')
+        }
         socket.join(r.name);
         room = r.name;
         users.push({roomname: room, username: r.user, id: socket.id});
@@ -29,6 +33,7 @@ io.on('connection', socket => {
     });
 
     socket.on('chat message', msg => {
+        msg.userid = socket.id;
         io.to(room).emit('chat message', msg);
     });
 

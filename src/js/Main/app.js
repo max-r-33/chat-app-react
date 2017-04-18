@@ -51,13 +51,17 @@ class app extends React.Component {
     componentDidMount(){
         socket.on('connect', () => {
             socket.on('chat message', msg => {
-                if(msg.user !== this.props.user.name){
+                if(msg.userid !== socket.id){
                     let {messages} = this.state;
                     let msgText = msg.user + ' : ' + msg.message;
                     let newMessage = <Message key={this.state.messages.length+1} sender='other' message={msgText} />;
                     let newMessages = [...messages, newMessage];
                     this.setState({messages: newMessages});
                 }
+            });
+
+            socket.on('username in use', () => {
+                console.log('username in use')
             });
 
             socket.on('user join', users => {
@@ -91,7 +95,7 @@ class app extends React.Component {
                              sendMessage = {this.sendMessage.bind(this)}
                              typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}/>
                 <BackgroundLayers />
-                <SetupInputs setUpRoom = {this.setUpRoom}/>
+                <SetupInputs ref='setup' setUpRoom = {this.setUpRoom}/>
             </div>
         )
     }
