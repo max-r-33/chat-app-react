@@ -9,13 +9,16 @@ import {connect} from 'react-redux';
 class setupInputs extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            error : ' '
+        }
     }
 
     componentDidMount(){
         document.getElementById('roomName').focus();
     }
 
-    onError(element){
+    onError(element, message){
         anime({
             targets:element,
             translateX: {
@@ -26,6 +29,9 @@ class setupInputs extends React.Component{
             loop:2,
             direction: 'alternate'
         });
+        if(message){
+            this.setState({err: message})
+        }
     }
 
     handleRoomNameSubmit(e){
@@ -51,29 +57,34 @@ class setupInputs extends React.Component{
     handleUsernameSubmit(e){
         e.preventDefault();
         let username = document.getElementById('messageUser').value;
-        if(username){
-            this.refs.progressBar.advance();
+        this.props.checkIfUsernameAvailable(this.props.room.name, username).then(res => {
+            if(res.data.inUse){
+                this.onError('#messageUser', 'Username already in use');
+                document.getElementById('error').style.opacity = 1;
+            }else{
+                this.refs.progressBar.advance()
 
-            document.getElementById('username').style.display = 'none';
+                document.getElementById('username').style.display = 'none';
 
-            //gets username and saves it to store
-            this.props.dispatch(addUser(username));
-            this.props.setUpRoom(this.props.room.name, username);
-            document.getElementById('3').style.opacity = 1;
-            document.getElementById('2').style.opacity = 0;
-            setTimeout(() => {
-                //transitions background
-                document.getElementsByClassName('progressBar')[0].style.display = 'none';
+                //gets username and saves it to store
+                this.props.dispatch(addUser(username));
+                this.props.setUpRoom(this.props.room.name, username);
 
-                //hides username input and shows message view
-                document.getElementById('msgView').style.opacity = 1;
+                document.getElementById('3').style.opacity = 1;
+                document.getElementById('2').style.opacity = 0;
 
-                //focuses messagBox
-                document.getElementById('messageBox').focus();
-            },1000);
-        }else{
-            this.onError('#messageUser')
-        }
+                setTimeout(() => {
+                    //transitions background
+                    document.getElementsByClassName('progressBar')[0].style.display = 'none';
+
+                    //hides username input and shows message view
+                    document.getElementById('msgView').style.opacity = 1;
+
+                    //focuses messagBox
+                    document.getElementById('messageBox').focus();
+                },1000);
+            }
+        })
     }
 
     render(){
@@ -81,9 +92,11 @@ class setupInputs extends React.Component{
             <section>
                 <form onSubmit={event => this.handleRoomNameSubmit(event)} className='roomNameContainer'>
                     <input autoCorrect='off' autoCapitalize='none' autoComplete='off' type='text' id='roomName' placeholder='chat room name' />
+                    <div className='error'></div>
                 </form>
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoCorrect='off' autoCapitalize='none' autoComplete="off" id='messageUser' type='text' placeholder='username' />
+                    <div className='error' id='error'>{this.state ? this.state.err : null}</div>
                 </form>
                 <ProgressBar labelText={['Room Name', 'Username', 'Creating room']} ref='progressBar'/>
             </section>
