@@ -29,7 +29,7 @@ class header extends React.Component {
 
     componentWillReceiveProps(nextProps){
         if(nextProps.usersInRoom !== this.props.usersInRoom){
-            let userElems = nextProps.usersInRoom.map((u, i) => <p className='userListing' key={i}>{u.username}</p>);
+            let userElems = nextProps.usersInRoom.map((u, i) => <p className='userListing' key={i}>{u.username === this.props.user.name ? u.username + ' (you)' : u.username}</p>);
             this.setState({userElems})
         }
     }
