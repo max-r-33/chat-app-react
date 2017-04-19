@@ -9,7 +9,7 @@ export default class progressBar extends React.Component{
             active : 0,
             duration : 800,
             elasticity : 40,
-            width: 300
+            width: 300,
         }
     }
 
@@ -20,20 +20,17 @@ export default class progressBar extends React.Component{
     }
 
     advance(){
-        let {active} = this.state;
-        active++;
-        this.setState({active});
-
+        let nextActive = this.state.active+1;
+        this.setState({active: nextActive,
+                       labels : this.props.labelText.map((t, i) => {
+                            return <ProgressBarLabel key={i} active={this.state.active + 1} elemNumber={i} text={t} />
+                        })});
         anime({
             targets:'.indicator',
-            translateX: ((this.state.width/2)*(this.state.active+1)-15),
+            translateX: this.state.active === 0 ? 135 : 280,
             elasticity : this.state.elasticity,
             duration : this.state.duration
         });
-
-        this.setState({labels : this.props.labelText.map((t, i) => {
-            return <ProgressBarLabel key={i} active={this.state.active + 1} elemNumber={i} text={t} />
-        })});
     }
 
     render(){

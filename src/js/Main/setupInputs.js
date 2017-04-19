@@ -9,6 +9,9 @@ import {connect} from 'react-redux';
 class setupInputs extends React.Component{
     constructor(props){
         super(props);
+        this.state = {
+            error : ' '
+        }
     }
 
     componentDidMount(){
@@ -57,8 +60,9 @@ class setupInputs extends React.Component{
         this.props.checkIfUsernameAvailable(this.props.room.name, username).then(res => {
             if(res.data.inUse){
                 this.onError('#messageUser', 'Username already in use');
+                document.getElementById('error').style.opacity = 1;
             }else{
-                
+                this.refs.progressBar.advance()
 
                 document.getElementById('username').style.display = 'none';
 
@@ -88,10 +92,11 @@ class setupInputs extends React.Component{
             <section>
                 <form onSubmit={event => this.handleRoomNameSubmit(event)} className='roomNameContainer'>
                     <input autoCorrect='off' autoCapitalize='none' autoComplete='off' type='text' id='roomName' placeholder='chat room name' />
+                    <div className='error'></div>
                 </form>
                 <form onSubmit={event => this.handleUsernameSubmit(event)} className='usernameContainer' id='username'>
                     <input autoCorrect='off' autoCapitalize='none' autoComplete="off" id='messageUser' type='text' placeholder='username' />
-                    {this.state ? this.state.err : null}
+                    <div className='error' id='error'>{this.state ? this.state.err : null}</div>
                 </form>
                 <ProgressBar labelText={['Room Name', 'Username', 'Creating room']} ref='progressBar'/>
             </section>

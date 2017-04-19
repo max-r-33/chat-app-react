@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/checkuser/:room/:user', (req, res) => {
-    let usersInRoom = users.filter(u => u.username === req.params.user);
+    let usersInRoom = users.filter(u => u.username === req.params.user && u.roomname === req.params.room);
     if(usersInRoom.length){
         res.status(200).json({inUse: true});
         return;

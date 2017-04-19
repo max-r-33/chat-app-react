@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-import config from '../../../.config.js';
+import config from '../../../config.js';
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Message from './MessageView/message';
