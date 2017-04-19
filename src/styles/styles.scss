@@ -109,7 +109,7 @@ section{
 }
 
 //------------------
-//message view styles
+//message view and modal styles
 //------------------
 .modal {
     position: fixed;
@@ -125,9 +125,19 @@ section{
     max-width                  : 300px;
     text-align                 : center;
     outline                    : none;
+    .modalHeader{
+        text-align: center;
+        padding-bottom:15px;
+        .leaveModal{
+            font-size:23px;
+            cursor:pointer;
+            position:absolute;
+            top:15px;
+        }
+    }
     .userListing{
         display:block;
-        font-weight:300;
+        font-weight:400;
         font-size:15px;
     }
 }
@@ -142,6 +152,21 @@ section{
     bottom: 0;
     outline: non;
 }
+.ReactModalPortal > div {
+    opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  transition: opacity 350ms ease-in-out;
+  background: rgba(0, 0, 0, 0.15);
+  &--after-open {
+    opacity: 1;
+  }
+  &--before-close {
+      opacity: 0;
+  }
+}
+
 .messageView{
     opacity:0;
     transition: all $transitionTime ease-in-out;
