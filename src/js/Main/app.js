@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import io from 'socket.io-client';
+import axios from 'axios';
 
+import config from '../../../.config.js';
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Message from './MessageView/message';
@@ -17,6 +19,10 @@ class app extends React.Component {
             userCount: 0,
             typingStatus: ''
         }
+    }
+
+    checkIfUsernameAvailable(roomName, username){
+        return axios.get(config.basedomain + 'checkuser/' +roomName + '/' + username)
     }
 
     setUpRoom(roomName, username){
@@ -60,10 +66,6 @@ class app extends React.Component {
                 }
             });
 
-            socket.on('username in use', () => {
-                console.log('username in use')
-            });
-
             socket.on('user join', users => {
                 let usersInRoom = users.filter(u => u.roomname === this.props.room.name)
                 this.setState({userCount: usersInRoom.length, usersInRoom});
@@ -95,7 +97,8 @@ class app extends React.Component {
                              sendMessage = {this.sendMessage.bind(this)}
                              typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}/>
                 <BackgroundLayers />
-                <SetupInputs ref='setup' setUpRoom = {this.setUpRoom}/>
+                <SetupInputs ref='setup' setUpRoom = {this.setUpRoom}
+                                         checkIfUsernameAvailable = {this.checkIfUsernameAvailable}/>
             </div>
         )
     }
