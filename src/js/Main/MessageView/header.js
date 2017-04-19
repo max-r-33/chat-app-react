@@ -48,7 +48,7 @@ class header extends React.Component {
                        isOpen={this.state.showModal}
                        closeTimeoutMS={350}>
                     <div className='modalHeader'>
-                        <div className='leave' onClick={this.toggleModal.bind(this)}>×</div>
+                        <div className='leave leaveModal' onClick={this.toggleModal.bind(this)}>×</div>
                         <div className='modalTitle'>Users in '{this.props.room.name}'</div>
                     </div>
                     {this.state.userElems}

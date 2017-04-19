@@ -125,9 +125,19 @@ section{
     max-width                  : 300px;
     text-align                 : center;
     outline                    : none;
+    .modalHeader{
+        text-align: center;
+        padding-bottom:15px;
+        .leaveModal{
+            font-size:23px;
+            cursor:pointer;
+            position:absolute;
+            top:15px;
+        }
+    }
     .userListing{
         display:block;
-        font-weight:300;
+        font-weight:400;
         font-size:15px;
     }
 }
@@ -142,7 +152,6 @@ section{
     bottom: 0;
     outline: non;
 }
-
 .ReactModalPortal > div {
     opacity: 0;
 }
