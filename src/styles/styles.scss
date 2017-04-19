@@ -109,7 +109,7 @@ section{
 }
 
 //------------------
-//message view styles
+//message view and modal styles
 //------------------
 .modal {
     position: fixed;
@@ -142,6 +142,22 @@ section{
     bottom: 0;
     outline: non;
 }
+
+.ReactModalPortal > div {
+    opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  transition: opacity 350ms ease-in-out;
+  background: rgba(0, 0, 0, 0.15);
+  &--after-open {
+    opacity: 1;
+  }
+  &--before-close {
+      opacity: 0;
+  }
+}
+
 .messageView{
     opacity:0;
     transition: all $transitionTime ease-in-out;
