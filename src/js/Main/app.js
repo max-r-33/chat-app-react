@@ -53,7 +53,7 @@ class app extends React.Component {
         socket.emit('user typing', this.props.user.name);
     }
 
-    //handles all socket events
+    //handles all socket events and checks for url params
     componentDidMount(){
         if(this.props.match.params.name){
             document.getElementById('roomName').value = this.props.match.params.name;
@@ -101,7 +101,8 @@ class app extends React.Component {
                              typingNotif = {_.debounce(this.handleTyping.bind(this), 1000, true)}/>
                 <BackgroundLayers />
                 <SetupInputs ref='setup' setUpRoom = {this.setUpRoom}
-                                         checkIfUsernameAvailable = {this.checkIfUsernameAvailable}/>
+                                         checkIfUsernameAvailable = {this.checkIfUsernameAvailable}
+                                         presetRoomName = {this.props.match.params.name}/>
             </div>
         )
     }

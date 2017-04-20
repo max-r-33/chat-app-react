@@ -7,7 +7,9 @@ export default class progressBarLabel extends React.Component{
 
     render(){
         return (
-            <div className={`progressLabel ${this.props.active === this.props.elemNumber ? 'active' : ''}`}>{this.props.text}</div>
+            <pre>
+                <div className={`progressLabel ${this.props.active === this.props.elemNumber ? 'active' : ''}`}>{this.props.text}</div>
+            </pre>
         );
     }
 }

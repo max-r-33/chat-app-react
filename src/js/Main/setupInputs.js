@@ -16,6 +16,9 @@ class setupInputs extends React.Component{
 
     componentDidMount(){
         document.getElementById('roomName').focus();
+        if(this.props.presetRoomName){
+            document.getElementById('roomName').value = this.props.presetRoomName;
+        }
     }
 
     onError(element, message){
@@ -98,7 +101,7 @@ class setupInputs extends React.Component{
                     <input autoCorrect='off' autoCapitalize='none' autoComplete="off" id='messageUser' type='text' placeholder='username' />
                     <div className='error' id='error'>{this.state ? this.state.err : null}</div>
                 </form>
-                <ProgressBar labelText={['Room Name', 'Username', 'Creating room']} ref='progressBar'/>
+                <ProgressBar labelText={this.props.presetRoomName ? ['Room Name', 'Username', '     Join Room'] : ['Room Name', 'Username', 'Creating room']} ref='progressBar'/>
             </section>
         )
     }
