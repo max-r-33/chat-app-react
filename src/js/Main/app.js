@@ -55,6 +55,9 @@ class app extends React.Component {
 
     //handles all socket events
     componentDidMount(){
+        if(this.props.match.params.name){
+            document.getElementById('roomName').value = this.props.match.params.name;
+        }
         socket.on('connect', () => {
             socket.on('chat message', msg => {
                 if(msg.userid !== socket.id){
