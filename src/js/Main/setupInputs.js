@@ -60,34 +60,38 @@ class setupInputs extends React.Component{
     handleUsernameSubmit(e){
         e.preventDefault();
         let username = document.getElementById('messageUser').value;
-        this.props.checkIfUsernameAvailable(this.props.room.name, username).then(res => {
-            if(res.data.inUse){
-                this.onError('#messageUser', 'Username already in use');
-                document.getElementById('error').style.opacity = 1;
-            }else{
-                this.refs.progressBar.advance()
+        if(username){
+            this.props.checkIfUsernameAvailable(this.props.room.name, username).then(res => {
+                if(res.data.inUse){
+                    this.onError('#messageUser', 'Username already in use');
+                    document.getElementById('error').style.opacity = 1;
+                }else{
+                    this.refs.progressBar.advance()
 
-                document.getElementById('username').style.display = 'none';
+                    document.getElementById('username').style.display = 'none';
 
-                //gets username and saves it to store
-                this.props.dispatch(addUser(username));
-                this.props.setUpRoom(this.props.room.name, username);
+                    //gets username and saves it to store
+                    this.props.dispatch(addUser(username));
+                    this.props.setUpRoom(this.props.room.name, username);
 
-                document.getElementById('3').style.opacity = 1;
-                document.getElementById('2').style.opacity = 0;
+                    document.getElementById('3').style.opacity = 1;
+                    document.getElementById('2').style.opacity = 0;
 
-                setTimeout(() => {
-                    //transitions background
-                    document.getElementsByClassName('progressBar')[0].style.display = 'none';
+                    setTimeout(() => {
+                        //transitions background
+                        document.getElementsByClassName('progressBar')[0].style.display = 'none';
 
-                    //hides username input and shows message view
-                    document.getElementById('msgView').style.opacity = 1;
+                        //hides username input and shows message view
+                        document.getElementById('msgView').style.opacity = 1;
 
-                    //focuses messagBox
-                    document.getElementById('messageBox').focus();
-                },1000);
-            }
-        })
+                        //focuses messagBox
+                        document.getElementById('messageBox').focus();
+                    },1000);
+                }
+            })
+        }else{
+            this.onError('#messageUser');
+        }
     }
 
     render(){
