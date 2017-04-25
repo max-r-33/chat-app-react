@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import io from 'socket.io-client';
 import axios from 'axios';
 
-import config from '../../../config.js';
+// import config from '../../../config.js';
 import BackgroundLayers from './backgroundLayers';
 import SetupInputs from './setupInputs';
 import Message from './MessageView/message';
@@ -22,7 +22,7 @@ class app extends React.Component {
     }
 
     checkIfUsernameAvailable(roomName, username){
-        return axios.get(config.basedomain + 'checkuser/' +roomName + '/' + username)
+        return axios.get(document.location.protocol + '//' + document.location.host + '/' + 'checkuser/' + roomName + '/' + username)
     }
 
     setUpRoom(roomName, username){
